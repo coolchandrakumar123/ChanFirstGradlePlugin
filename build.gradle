@@ -1,0 +1,38 @@
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'java'
+    id 'com.chan.gradle-plugin' version '0.0.1-SNAPSHOT'
+}
+
+group = 'com.chan'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    google()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31"
+    implementation(gradleApi())
+    compile 'com.squareup:javapoet:1.11.1'
+    compile 'com.squareup:kotlinpoet:1.3.0'
+}
+
+gradlePlugin {
+    plugins {
+        fileDiff {
+            id = 'com.chan.gradle-plugin'
+            implementationClass = 'com.chan.gradle.plugin.ChanFirstPlugin'
+        }
+    }
+}
+
+chanFirstPlugin {
+    firstString.set("This is inside GradlePlugin")
+    secondString.set("getLayoutById")
+}
