@@ -3,11 +3,11 @@ plugins {
     id 'java-gradle-plugin'
     id 'maven-publish'
     id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.61'
     id 'com.chan.gradle-plugin' version '0.0.1-SNAPSHOT'
 }
 
-group = 'com.chan'
-version = '0.0.1-SNAPSHOT'
+//apply plugin: 'kotlin'
 
 repositories {
     mavenLocal()
@@ -17,22 +17,35 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.31"
     implementation(gradleApi())
+    compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.61'
     compile 'com.squareup:javapoet:1.11.1'
     compile 'com.squareup:kotlinpoet:1.3.0'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+group = 'com.chan'
+version = '0.0.1-SNAPSHOT'
 gradlePlugin {
     plugins {
         fileDiff {
             id = 'com.chan.gradle-plugin'
-            implementationClass = 'com.chan.gradle.plugin.ChanFirstPlugin'
+            //implementationClass = 'com.chan.gradle.plugin.ChanFirstPlugin'
+            implementationClass = 'com.chan.gradle.plugin.PlatformBinderGenPlugin'
         }
     }
 }
 
-chanFirstPlugin {
+deskBinderPlugin {
     firstString.set("This is inside GradlePlugin")
     secondString.set("getLayoutById")
 }
+
+task cleanApp(type: Delete) {
+    delete rootProject.buildDir
+}
+
