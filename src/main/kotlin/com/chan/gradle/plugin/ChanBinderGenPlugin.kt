@@ -4,10 +4,10 @@ import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-const val EXTENSION_NAME = "deskBinderPlugin"
-const val TASK_NAME = "platformKotlinGen"
+const val EXTENSION_NAME = "chanBinderPlugin"
+const val TASK_NAME = "chanBinderGen"
 
-abstract class PlatformBinderGenPlugin: Plugin<Project> {
+abstract class ChanBinderGenPlugin: Plugin<Project> {
     override fun apply(project: Project) {
         val extension = project.extensions.create<PluginExtensions>(
             EXTENSION_NAME,
@@ -17,7 +17,7 @@ abstract class PlatformBinderGenPlugin: Plugin<Project> {
             FileGenerateTask::class.java,
             Action { task: FileGenerateTask ->
                 task.firstString.set(extension.firstString)
-                task.secondString.set(extension.secondString)
+                task.language.set(extension.language)
             })
     }
 

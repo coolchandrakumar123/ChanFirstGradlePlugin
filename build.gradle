@@ -23,11 +23,6 @@ dependencies {
     compile 'com.squareup:kotlinpoet:1.3.0'
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
 group = 'com.chan'
 version = '0.0.1-SNAPSHOT'
 gradlePlugin {
@@ -35,14 +30,14 @@ gradlePlugin {
         fileDiff {
             id = 'com.chan.gradle-plugin'
             //implementationClass = 'com.chan.gradle.plugin.ChanFirstPlugin'
-            implementationClass = 'com.chan.gradle.plugin.PlatformBinderGenPlugin'
+            implementationClass = 'com.chan.gradle.plugin.ChanBinderGenPlugin'
         }
     }
 }
 
-deskBinderPlugin {
-    firstString.set("This is inside GradlePlugin")
-    secondString.set("getLayoutById")
+chanBinderPlugin {
+    firstString.set("Chan GradlePlugin")
+    language.set("kotlin")
 }
 
 task cleanApp(type: Delete) {
